@@ -5,9 +5,16 @@
         <li class="item  item--post">
           <article class="article  article--post">
 
+            {% if page.feature_image %}
+            <a href="{{ site.baseurl }}{{ page.url }}">
+                <div class="feature" {% if feature_image %} style="background-image: url({{ page.feature_image }})" {% endif %}></div>
+            </a>
+            {% endif %}
+
             <h2><a href="{{ site.baseurl }}{{ page.url }}">{{ page.title }}</a></h2>
             {% include post-meta.html %}
-            {{ page.excerpt | markdownify | truncatewords: 60 }}
+
+            {{ page.excerpt | markdownify | strip_html | markdownify | truncatewords: 60 }} <!-- removed all images from excerpt -->
 
           </article>
         </li>
